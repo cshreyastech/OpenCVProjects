@@ -9,9 +9,8 @@
         "-g",
         "${file}",        
         
-        "-I${workspaceFolder}/PCH/include",
-
-        // "-I${workspaceFolder}/MovieTicketBooking/include",
+        "-I${workspaceFolder}/pch/include",
+        "-I$/mnt/hd/disk2/softwares/OpenCV/installation/OpenCV/include/opencv4",
         // "-I${workspaceFolder}/MyFlipCart/include",
         // "-I${workspaceFolder}/ParkingLot/include",
         // "-I${workspaceFolder}/Chess/include",
@@ -20,6 +19,10 @@
 
         "-o",
         "${fileDirname}/build/${fileBasenameNoExtension}",
+        "`pkg-config",
+        "--cflags",
+        "--libs",
+        "opencv4`"
       ],
       "options": {
         "cwd": "${fileDirname}"
