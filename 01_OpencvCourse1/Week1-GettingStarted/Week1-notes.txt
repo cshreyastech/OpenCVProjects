@@ -1,0 +1,50 @@
+Introduction to Computer vision
+-------------------------------
+
+Image Processing vs Computer Vision
+-----------------------------------
+Image processig -> input is image output is also an image
+Examples
+1) Noise reduction
+2) Edge detection
+3) Image and video compression
+
+Image processing -> input is an image and opuput in an information like features, location, identity
+Example: 
+1) Face recognition: Input in image and output is identity of the person
+2) Object detection: Input is image and output is location of an object and lables of the object
+
+Problems in Computer Vision
+---------------------------
+1) Image processing
+Input is an image and output is filtered version of the image
+a) Image denoising
+b) Enhancement
+c) Restoration
+
+Image and Video Compression
+Image binarization and binary image processing
+Edge detection / Corner detection
+
+2) 3D reconstruction using 2D images
+a) Stereo vision
+b) Projector Camera systems
+
+3) Multiple view structure promotion
+Structure from Motion
+Visual SLAM
+
+3) Shape from Shading
+a) Photmetric Stereo
+
+4) Feature detection and matching
+a) Image alignment
+b) motion estimation
+
+5) Image recogniation
+1) Image classification
+2) Object detection
+3) Object tracking
+
+6) Image Segmention
+7) Natural Image matting

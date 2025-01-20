@@ -9,11 +9,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 ### Uncomment the line below and specify the path to OpenCV directory i.e. the path to the OpenCVConfig.cmake file. Check the examples given below.
 ###SET PATH TO OPENCV CMAKE CONFIG FILES
 
-# find_package( OpenCV 
-#   NO_DEFAULT_PATH
-#   PATHS "/mnt/hd/disk2/softwares/OpenCV/installation/OpenCV"
-#   REQUIRED 
-#   )
+find_package( OpenCV 
+  NO_DEFAULT_PATH
+  PATHS "/mnt/hd/disk2/softwares/OpenCV/installation/OpenCV"
+  REQUIRED 
+  )
 
 find_package( OpenCV REQUIRED )
 # INCLUDE OPENCV DIRECTORIES
@@ -21,5 +21,4 @@ include_directories( ${OpenCV_INCLUDE_DIRS})
 
 
 # add_subdirectory(SampleCode)
-# add_subdirectory(ThreeDReconstruction)
-add_subdirectory(OpencvCourse1)
+add_subdirectory(01_OpencvCourse1)

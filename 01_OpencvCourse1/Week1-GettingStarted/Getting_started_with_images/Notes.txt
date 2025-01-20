@@ -1,0 +1,25 @@
+How are image formed?
+3d object, pin hole image plane
+focal length: distance between pin hole and image plane
+size of the image is propotional to focal length
+height propotional to 1 / distance of focal length 
+x = f * X / Z
+y = f * Y / Z
+
+Optical axis
+focus: The point at which the rays parellel to Optical Axis convege on Optical Axis
+focal plane: Plane perpendicular to Optical axis and placed at focus 
+
+Digital Images
+Bayer Pattern: Number of green pixels twices as many blue and red pixels. Human eye much more sensitive to green light compared to red and blue.
+Demosaicing: Two missing challenges in RBG image is calculated using interpolation of neighboring pixels
+
+JPEG: Joint Photographic Expert Group(JPEG)
+  Image Header
+    Width, Height, no. of Channel, Color Profile, No. of bit per pixel
+  Data
+    RGB value
+OpenCV image storage in c++:
+Mat Class
+  Image Header
+  Data: BGR values in row major format
