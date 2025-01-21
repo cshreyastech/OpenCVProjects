@@ -12,8 +12,8 @@ using namespace cv;
 
 
 int main(){
-	std::string DATA_PATH = "./01_OpencvCourse1/Week1-GettingStarted/Assigment-QRcodeDetector/";
-  std::string RESULTS_PATH = "./01_OpencvCourse1/Week1-GettingStarted/Assigment-QRcodeDetector/results/";
+	std::string DATA_PATH = "./01_OpencvCourse1/Week1-GettingStarted/Assigment_QRcodeDetector/";
+  std::string RESULTS_PATH = "./01_OpencvCourse1/Week1-GettingStarted/Assigment_QRcodeDetector/results/";
   // Image Path
 	string imgPath = DATA_PATH + "images/IDCard-Satya.png";
 
