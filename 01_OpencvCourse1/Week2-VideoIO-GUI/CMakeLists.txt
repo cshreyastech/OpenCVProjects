@@ -45,4 +45,5 @@ ENDMACRO()
 # add_example(VideoRead)
 # add_example(VideoWrite)
 
-add_subdirectory(Assignment_FaceAnnotationTool)
+# add_subdirectory(Assignment_FaceAnnotationTool)
+add_subdirectory(Assignment_Trackbar)

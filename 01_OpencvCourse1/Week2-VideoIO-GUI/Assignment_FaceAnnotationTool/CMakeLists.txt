@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12)
 
-PROJECT(CV2_Assignment)
+PROJECT(FaceAnnotationTool)
 SET(CMAKE_CXX_STANDARD 11)
 
 ######################## EDIT IF REQUIRED ####################

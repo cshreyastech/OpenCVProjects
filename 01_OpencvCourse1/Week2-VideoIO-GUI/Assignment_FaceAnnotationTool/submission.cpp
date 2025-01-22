@@ -1,4 +1,3 @@
-// Face Annotate Tool -Assignment
 #include <opencv2/opencv.hpp>
 #include <opencv2/objdetect.hpp>
 #include <opencv2/imgcodecs.hpp>
@@ -35,6 +34,11 @@ void AnnotateTool(int action, int x, int y, int flags, void *userdata)
   else if( action == cv::EVENT_LBUTTONUP)
   {
     end_point = cv::Point(x,y);
+    
+    cv::rectangle(source_img, start_point, end_point,
+      cv::Scalar(0, 255, 0), 5, cv::LINE_8);
+    cv::imshow("Window", source_img);
+
     crop = source_img(cv::Range(start_point.y, end_point.y),
       cv::Range(start_point.x, end_point.x));
   }  
