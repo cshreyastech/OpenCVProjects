@@ -1,0 +1,2 @@
+Supervised: Find a mapping from input to output
+Unsupervised: outputs patterns in the data

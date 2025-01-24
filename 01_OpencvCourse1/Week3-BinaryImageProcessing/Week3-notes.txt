@@ -1,0 +1,20 @@
+Binary Image Processing
+----------------------
+> Thresholding operations: Converts Gray Scale image to Binary image based on intensity of pixels
+- Binary Thresholding
+- Inverse Binary Thresholding
+- Truncate Thresholding
+- Threshold to Zero
+- Inverted Threshold to Zero
+- Adaptive Thresholding
+- Otsu's Thresholding
+
+> Errosion & Dilation: Srink or Expand binary blobs
+- Morphological operation
+- Dilation: to enlarge
+- Errosion: To srink
+
+> When using combination these operations are called opening or closing. Used for removing noise from binary images.
+> Simple Blob detectors: Detect blobs of specific charesitics
+> Connected component analysis: Labeling blobs. To mention these pixels are together and labeling them.
+> contour analysis
