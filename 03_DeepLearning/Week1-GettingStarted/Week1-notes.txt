@@ -1,2 +1,17 @@
 Supervised: Find a mapping from input to output
 Unsupervised: outputs patterns in the data
+Ex: Clustering
+
+Classification vs Regression
+Classification: goals is to classify input into different categories
+Regression: Predict a number or collection of numbers from input
+Deep neural network
+Image Classification steps:
+step1: preprocessing
+step2: Convert the image to feature vector
+step3: Pass feature vector to learning algorithm for classification
+Hyperplane
+
+Error & loss function L = ei^2 = sum(y - mx)^2
+- Gradient Descent
+ - Stochastic Gradient Descent

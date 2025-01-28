@@ -1,0 +1,66 @@
+- Input data is converted to Feature Vectors
+- When constructed properly Feature Space have meaningful distances
+- Numerical features show be Normalized
+
+Binary Clasification
+Activation fuctions:
+- Sigmoid, tanh, ReLU, Unit Step Function, Leacky Relu, Noisy Relu, Exponential Relu
+
+Multiclass Classification: Softmax
+Regression: Linear
+
+Regression Loss function
+------------------------
+Mean Squared error  L = 1/ n E, i=1,n(yi - y_hati)^2
+Mean Absolute Error L = 1/ n E, i=1,n|yi - y_hati|
+L2Norm (MSE) = ||y - yhat||^2
+||x||2 = sqrt(x1^2 + x1^2 + ..... + xn^2)
+L1Norm (MAE) = ||y - yhat||
+- MSE loss is mostly commonly used
+- MAE loss is used when the data has outliers
+
+Classification Loss function
+----------------------------
+Catogorical cross entropy loss
+Entropy H(p) = -E pi*log(pi)
+Cross Entropy: 
+- Measuring how similar two distributions are
+- Not symmetric: H(p,q) Not = to H(q, p)
+- When the two distributions are the same, cross entropy equals entropy
+- Otherwise cross entropy > entropy H(p, q) >= H(p)
+Also called as logarithmic loss, log loss, logistic loss, categorical cross entropy loss, cross entropy
+Other losses:
+ - Unbalanced dataset: Cross entropy with weights
+ - Face recognition: Triplet loss
+
+Types of Activation Function
+----------------------------
+1) Linear activation: Only in output layer
+2) Sigmoid function sigma(x) = 1 / (1 + e^-x)
+  - Vanishing gradients
+  - Computationally expensive
+  - No zero centered
+3) tanh(x) = 2 sigma(2x) - 1
+  Pros
+  - Re-scaled and re-centered sigmoid
+  - S-Shaped(non-linear)
+  - input range: -inf to inf
+  - Symmetric output range: -1 to 1
+  - Converges faster than sigmoid
+  Cons
+  - Vanishing gradient
+  - Computationally expensive
+4) ReLU - Rectified Linear Unit
+  Pros
+  - No vanishing gradients
+  - Computationally inexpensive
+  - Fast convergence
+  - True zero output useful in certain domains like denoising autoencoders.
+  Cons
+  - Dying ReLU
+5) Leaky ReLU
+  Pros
+  - Piecewise linear
+  - No vanishing gradients
+  - Conputationally inexpensive
+  - Solves the dying ReLU problem
