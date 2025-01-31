@@ -1,0 +1,107 @@
+CNN
+- Evaluation matrix used for clasification tasks
+  - Decision and recall used for binary classification
+    - ROC curve
+- How accuracy is measured for multi-class classification?
+- Convolution filters
+- Layer
+  - Fully conected layers, activation layer, Convolution and Maxpooling layer
+  - Batch normalization layers
+
+Convolution
+Input matrix * Kernel = output matrix
+
+Layers in CNN
+  - Fully connected
+    Xout = Wxin + b
+    Xout E R^m
+    Xin E R^n
+    b E R^m
+    W E R^(m x n)
+      - optput probability of each of lables between 0 and 1.
+      - Usally used in the last layer
+
+Activation 
+  - Sigmoid, Hyperbolic tangent, ReLU, Leaky ReLU
+
+Convolution Layer
+  - Input (Width x Height X Channels)
+    W and H are called spacial representation
+  - Feature or activation maps are intermediate layers
+  - Kernels 
+  - Stride
+  - Padding
+  n_out = base of[(n_in + 2p -k) / s] + 1
+  n_out -> Number of output features
+  n_in  -> Number of input features
+  k     -> Convolution kernel Size
+  p     -> Convolution Padding Size
+  s     -> Convolution stride size
+  - Pooling -> Used to decrease the size of the feature map, parameters and computation 
+    - Max pooling
+    - Average pooling
+  - Batch normalization Layer
+    - Select a Channel
+    - Calculate mean & standard deviation over all images in the mini-batch
+    - Replace matrix location x with x_hat
+    - Repeat for all channels
+
+    - Data Normalization
+      Applies zero mean and unit variance to Deep learning layers
+      This is applied for CNN and Fully Connected layers
+      x_hat = (x - mu) / sigma
+      x-> data point
+      mu -> mean
+      sigma -> Standard Deviation
+
+    This can affect the learning adversely. So gamma and beeta were added
+    x_hat = gamma * (x - mu) / sigma + Beeta
+    gamma -> Learned scale
+    beeta -> Learned offset
+    - Advantage of use Batch normalization layers
+      - Faster model convergence
+        - Use higher learning rate
+        - User larger learning rate decay
+      - Mitigates the problems with non-zero centered activation functions like ReLU.
+      - Improves stability and quality
+      - Better regularization. That is prevents overfitting
+    - Location of batch normalization: CONV / FC -> Batchnorm -> ReLU
+  - Receptive Field
+- Performance and Evaluation matrix for a classifyer
+  - Confusion matrix
+    - Normalized confusion matrix
+  - Accuracy = Correct predictions / Total Samples
+             = (TP + TN) / (TP + TN + FP + FN)
+    - Simple and intuitive
+    - Not a good metric for imbalanced datasets
+  - Precision - Positive predictive value
+    - Precistion is the fration of relevent instances among the instanes classified as relevent.
+    - Helps focus on decreasing the False Positive rate.
+    - Precision = TP / (TP + FP )
+  - Recall or Sensitivity:
+    - Recall is the fraction of the total amount of true positives that were actually retrieved.
+    - It is also called True Positive Rate.
+    - Recall = TP / (TP + FN)
+    - Recall describes the numbe of true positives found by the model out of total true positives.
+  - F1 Score
+    - It is a combinaion of Precision and Recall
+    - Best value reach 1 when Precision = Recall = 100%
+    - Worst value = 0
+    F1 = 2 * (precision * recall) / (precision + recall) = 2 * TP / (2 * TP + FP + FN)
+    - Application: F1 used when there is small positive class
+    - Survilance: Precision matters more
+    - Medical analysis: Recall matters more
+  - Area Under the Curve(AUC) ROC
+    - A receiver opeerating characteristic curve is a graphical plot that illustrates the diagnostic ability of a binay classifier system as its discrimination threshold is varied
+    - True positive rate / Sensitivity / Recall = True Positive / Total Positive
+    - False Positive rate / Fall out = False Positive / Total Negative
+    - Draw backs
+      - It gives equal importance to Precision and Accuracy
+
+Multiclass Classification
+  - Top 1 accuracy - identified lable is top 1 label
+  - Top 5 accuracy - identified lable is one among top 5 label
+  - Confusion matrix
+  - Accuracy = Numbe of correct prediction / Total number of samples
+
+Fine grain Classification
