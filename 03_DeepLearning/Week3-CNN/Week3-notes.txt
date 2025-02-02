@@ -47,7 +47,8 @@ Convolution Layer
     - Repeat for all channels
 
     - Data Normalization
-      Applies zero mean and unit variance to Deep learning layers
+      - Applies zero mean and unit variance to Deep learning layers
+      - Select a channel and calculate mean and Standard deviation over all images in the mini-batch. Repeat for each channel.
       This is applied for CNN and Fully Connected layers
       x_hat = (x - mu) / sigma
       x-> data point
@@ -66,7 +67,10 @@ Convolution Layer
       - Improves stability and quality
       - Better regularization. That is prevents overfitting
     - Location of batch normalization: CONV / FC -> Batchnorm -> ReLU
+      - Recently it is applied CONV / FC -> ReLU -> Batchnorm
   - Receptive Field
+    - Defined in the input space that a perticular CNN feature map represents. If each pick cell of the first layer feature map contains information about the 3x3 region of the image than each 3 x3 region of the second layer will know about the information in the first layer feature map and so 5 x 5 region of the input image. pooling layer increase receptive field but reduces the resolution.
+    - With larger size of Receptive field each layer can know more context and represent more abstract meaning. context mean near by pixels. 
 - Performance and Evaluation matrix for a classifyer
   - Confusion matrix
     - Normalized confusion matrix
