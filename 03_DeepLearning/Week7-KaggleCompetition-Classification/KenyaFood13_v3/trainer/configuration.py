@@ -58,4 +58,4 @@ class TrainerConfig:
     model_saving_frequency: int = 1  # frequency of model state savings per epochs
     device: str = "cpu"  # device to use for training.
     epoch_num: int = 1 #50  # number of times the whole dataset will be passed through the network
-    progress_bar: bool = True  # enable progress bar visualization during train process
+    progress_bar: bool = False  # enable progress bar visualization during train process

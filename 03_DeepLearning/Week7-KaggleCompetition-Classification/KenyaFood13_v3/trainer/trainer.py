@@ -220,9 +220,13 @@ class Trainer:  # pylint: disable=too-many-instance-attributes
 
             if (epoch + 1) % self.model_saving_frequency == 0:
                 os.makedirs(self.save_dir, exist_ok=True)
-                torch.save(
-                    self.model.state_dict(),
-                    os.path.join(self.save_dir, self.model_name_prefix) + str(datetime.datetime.now())
+                torch.save({
+                    'model_state_dict': self.model.state_dict(),
+                    'optimizer_state_dict': self.optimizer.state_dict(),
+                    'epoch': epoch,
+                    'loss': output_test['loss'],
+                },
+                           os.path.join(self.save_dir, self.model_name_prefix) + str(datetime.datetime.now())
                 )
         return self.metrics
 
