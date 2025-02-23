@@ -1,13 +1,17 @@
 # # <font style="color:blue">Configurations</font>
-
+import os
 from typing import Callable, Iterable
 from dataclasses import dataclass
 
 from torchvision.transforms import ToTensor
 
+import torch
+import torch.nn as nn
+
 
 # ## <font style="color:green">System Configuration</font>
 
+base_dir = "../../../../data/Week7_project2_classification/"
 @dataclass
 class SystemConfig:
     seed: int = 42  # seed number to set the state of all random number generators
@@ -19,7 +23,8 @@ class SystemConfig:
 
 @dataclass
 class DatasetConfig:
-    root_dir: str = "data"  # dataset directory root
+    # root_dir: str = "data"  # dataset directory root
+    root_dir: str = os.path.join(base_dir, "KenyanFood13Dataset")
     train_transforms: Iterable[Callable] = (
         ToTensor(),
     )  # data transformation to use during training data preparation
@@ -53,9 +58,45 @@ class OptimizerConfig:
 
 @dataclass
 class TrainerConfig:
-    model_dir: str = "../../../../data/Week7_project2_classification/checkpoints"  # directory to save model states
+    trainer_name: str = "base_trainer"
+    model_dir: str = os.path.join(base_dir, trainer_name, "checkpoints")
+    tensor_board_dir: str = os.path.join(base_dir, trainer_name, "runs")
     # model_dir: str = "checkpoints"  # directory to save model states
     model_saving_frequency: int = 1  # frequency of model state savings per epochs
     device: str = "cpu"  # device to use for training.
     epoch_num: int = 1 #50  # number of times the whole dataset will be passed through the network
     progress_bar: bool = False  # enable progress bar visualization during train process
+
+class Model(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+        # convolution layers
+        self._body = nn.Sequential(
+            nn.Conv2d(in_channels=3, out_channels=32, kernel_size=7),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2),
+            
+            nn.Conv2d(in_channels=32, out_channels=64, kernel_size=5),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2),
+        )
+
+        # Fully connected layers
+        self._head = nn.Sequential(
+            nn.Linear(in_features=64*52*52, out_features=1024), 
+            nn.ReLU(inplace=True),
+            
+            nn.Linear(in_features=1024, out_features=13)
+        )
+    
+    def forward(self, x):        
+        # apply feature extractor
+        x = self._body(x)
+        # flatten the output of conv layers
+        # dimension should be batch_size * number_of weight_in_last conv_layer
+        x = x.view(x.size()[0], -1)
+        # apply classification head
+        x = self._head(x)
+        
+        return x

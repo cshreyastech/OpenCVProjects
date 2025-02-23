@@ -6,8 +6,8 @@ from .visualizer import Visualizer
 
 
 class TensorBoardVisualizer(Visualizer):
-    def __init__(self):
-        self._writer = SummaryWriter("../../../../data/Week7_project2_classification/runs")
+    def __init__(self, tensor_board_dir): 
+        self._writer = SummaryWriter(tensor_board_dir)
 
     def update_charts(self, train_metric, train_loss, test_metric, test_loss, learning_rate, epoch):
         if train_metric is not None:
