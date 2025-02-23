@@ -53,8 +53,8 @@ class OptimizerConfig:
 
 @dataclass
 class TrainerConfig:
-    # model_dir: str = "./../../../data/resource/week6_LeNet/checkpoints"  # directory to save model states
-    model_dir: str = "checkpoints"  # directory to save model states
+    model_dir: str = "../../../../data/Week7_project2_classification/checkpoints"  # directory to save model states
+    # model_dir: str = "checkpoints"  # directory to save model states
     model_saving_frequency: int = 1  # frequency of model state savings per epochs
     device: str = "cpu"  # device to use for training.
     epoch_num: int = 1 #50  # number of times the whole dataset will be passed through the network

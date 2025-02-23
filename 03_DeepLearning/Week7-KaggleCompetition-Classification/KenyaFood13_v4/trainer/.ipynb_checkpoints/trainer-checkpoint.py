@@ -157,6 +157,7 @@ class Trainer:  # pylint: disable=too-many-instance-attributes
         self.device = device
         self.model_saving_frequency = model_saving_frequency
         self.save_dir = save_dir
+        print("Trainer - self.save_dir: ", self.save_dir)
         self.model_name_prefix = model_name_prefix
         self.stage_progress = stage_progress
         self.data_getter = data_getter
