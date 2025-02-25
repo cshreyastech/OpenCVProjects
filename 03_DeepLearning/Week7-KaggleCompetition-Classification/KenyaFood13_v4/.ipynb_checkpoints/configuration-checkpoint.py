@@ -59,16 +59,14 @@ class OptimizerConfig:
 @dataclass
 class TrainerConfig:
     trainer_name: str = "base_trainer"
-    model_name_prefix: str = trainer_name + ".pt"
-    model_dir: str = os.path.join(base_dir, trainer_name, "checkpoints") # directory to save model states
-    tensor_board_dir: str = os.path.join(base_dir, trainer_name, "runs") 
+    model_dir: str = os.path.join(base_dir, trainer_name, "checkpoints")
+    tensor_board_dir: str = os.path.join(base_dir, trainer_name, "runs")
+    # model_dir: str = "checkpoints"  # directory to save model states
     model_saving_frequency: int = 1  # frequency of model state savings per epochs
     device: str = "cpu"  # device to use for training.
     epoch_num: int = 1 #50  # number of times the whole dataset will be passed through the network
     progress_bar: bool = False  # enable progress bar visualization during train process
-    submission_dir: str = os.path.join(base_dir, trainer_name, "submissions")
-    
-    
+
 class Model(nn.Module):
     def __init__(self):
         super().__init__()

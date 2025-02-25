@@ -4,7 +4,7 @@ import pandas as pd
 import time
 
 from torch.utils.data import Dataset, DataLoader, random_split
-# from PIL import Image
+from PIL import Image
 
 class KenyanFood13DatasetTest(Dataset):
     """
