@@ -1,0 +1,86 @@
+Object detetion
+- One stage Object detection
+    - YOLO, SSD, Retina-Net, Single shot multi-box
+- Two steps Object detection
+    - RCNN, Fast RCNN, Faster RCNN, Pyramid Networks
+Steps
+1) Bouding boxes around objects
+2) Classes or names of objects
+
+Challenges
+1) Intra Class variance: 
+    Objects of the same class can look very different.
+2) Pose variation
+    - Rigit transformation
+        Ex: Car where the structure does not change
+    - Non-Rigid transformation
+        Ex: Human: Body, Hands and legs can move changing the structure
+3) Occlusion
+    - Object of interest can be partially occluded by other objects in the scene
+4) Large search space over multiple
+    - Locations
+    - Scale
+    - Aspect ratio
+5) Crowded Scene
+    - Too many objects in the scene
+
+6) Datasets
+    1) PASCAL VOC
+        - 20 object categories
+        - 11K objects
+    2) MS COCO
+        - 91 common ojbect categories
+        - 2.5 M labeled instances
+        - 328K images
+    3) IMAGENET(2014)
+        - 200 Object categories
+        - 500k images
+        - 20K - Validation images
+        - 40K - Test images
+        - ~ 575 object instances
+
+7) Object Detection Evaluation Metrices
+    - Intersection and Union
+        - IOU = area of overlap / area of union
+        - To evaluate detection, we need to set threshold
+            if IoU > Threshold = Prediction intersects well with the ground
+            Ground Truth BBox, Prediction BBox
+        - IoU threadhold determins how well localization works
+    - Confidence Score
+        - Confidence score is the probability that the bounding box contains object
+        - Usually predicted by the classifier
+        - We need to set Confidence threshold which is different from IoU threshold
+        - Confidence Threshold refers to the probabiity of finding an object inside the bounding box.
+8) How to evaluate detection?
+    - It is considered True Positive (TP) only if
+        - Confidence Score > Confidence Threshold
+        - IoU > IoU threshold
+    - False Positive
+        - Confidence Score > Confidence Threshold
+        - No ground truth bounding box(IoU = 0)
+            - IoU < IoU threshold
+    - False Negative
+        - Confidence Score < Confidence Threshold
+        - No bounding boxes detected near ground truth bounding box
+            - IoU < IoU threshold
+    - Recall: It is the ability of a model to find all rlevant objects
+        Recall = TP / (TP + FN) = TP / (all ground truth)
+    - Precision: It is the ability to identify only the relevant objects
+        Precision = TP / (TP + FP) = TP / (all detections)
+    - Recall - Precision curve
+    - When Confidene threshold decreases, Recall increases, Precision may increase or decrease
+    - Mean Average Precision(mAP)
+    - Average Precision metric is the area under Recall-Precision curve. Higher its better.
+    AP11-points = 1/11 sigmar E{0, 0.0, ...,1}pinterp(r)
+    mAP = (1 / N) E N to class=0 APclass 
+
+Pipeline for Object Detection
+------------------------------
+1) Input Image: 
+2) Generate Proposals : Guesses for bounding boxes that may contain objects. Generate bounding boxes which may contain objects
+    - Background subraction
+    - Sliding Window
+    - Image pyramid
+    - Selective Search
+3) Classify Regions: Image Classification in the Bounding box
+4) Non-Maximum Suppression

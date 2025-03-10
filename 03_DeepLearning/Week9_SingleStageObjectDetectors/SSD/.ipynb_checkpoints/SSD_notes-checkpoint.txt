@@ -1,0 +1,19 @@
+Single Shot Multibox Detector (SSD)
+-----------------------------------
+- Default Bounding boxes: Check if default bounding box contains an object or not. It is not responsible for idenitying other objects
+    - Handling Scale Variation
+    - Handling Aspect Ratio
+    - Detector + classifier
+        - c+ 4 where 4 is this the coordinates of the BBox being trained
+        - 21 -> 20 classes + 1 class for background
+        - Understing one row of the tensor (1 x 1 x 150)
+            - 1 to 25 bins correspondes to default box 
+                - 1 to 4 -> dx, dy, dw, dh -> Position of default box are fixed
+                - 5 to 25 -> class 1 to 20 + background
+            - there are 6 boxes: 6 * 25 = 150
+        - 19 x 19 x 6 BBoxs = 19*19*6 = 2166 total bounding boxes
+- Training
+- Loss function
+    - Classification Loss (detected class and the actual ground truth class)
+    - Localization Loss (detected class and the actual ground truth class)
+- Class imbalance problem

@@ -1,0 +1,44 @@
+Detrecron
+YOLO: You Only Look Once
+    - It does not have Proposal Generator and Refine Stages
+    - It directly predict Bounding box through Single Stage Network using features from the entire images
+    - It predicts Bounding Box of all classes simultaneously
+    - Step 1: Resize the image
+    - Step 2: Divide image into cells (S x S) (7 x 7)
+        - Each cell has two responsibilities
+            1) Predicts 2 Bounding Boxes
+            2) Predicts confidence for each box (Show using thickess
+        - Each BBox has five parameters
+            1) (x, y, w, h)
+                - (x, y) -> center of the BB
+                - w -> width
+                - h -> height
+            2) Confidence
+        - Total number of Bounding Boxes = S x S x B = 7 x 7 x 2 = 98
+        - It could detect 98 objects
+        - Each cell also produces class probability given there is an object
+            P(Class | Object)
+    - Step 3: Non-Maxium suppression + Threshold to reduce the number of Bounding Boxes
+    - Output Tensor:
+    - Training data
+        1) Images
+        2) Bounding Boxes with class labels(x, y, w, h, class label corresponding to each Bounding box)
+        - What do we want to achive during the training process?
+            - The training process will choose the BBox which has maximum overlap with Ground truth BBox.
+                - The cell that contains the center of the gound truth BBox is responsible for detecting it.
+            - Adjust the coordinates of the BBox to match Coordinates of Ground Truth BBox
+            - Find the predicted bounding box
+                - Increase confidence of BBox with largest overlap with GT.
+                - Decrease confidence of BBox with smaller overlap(For the 2nd BBox)
+            - For Cells with no objects
+                1) Reduce confidence of the BBox
+                2) Do not change class probabilities of BBox coordinates
+    - Loss Function
+        - Localization error + Confidence + Confidence of BBox at empty cells + Conditional probability of final class
+    - Pros
+        - Much faster than Faster R-CNN
+        - Very good accuracy
+    - Cons
+        - Hard to detect groups of small objects(limited number of boxes)
+        - Hard to handle multi-scale objects(limited scale of output feature map)
+            
