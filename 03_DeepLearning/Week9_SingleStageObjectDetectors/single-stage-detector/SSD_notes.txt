@@ -1,0 +1,67 @@
+SSD: Single Shot Multibox Detector
+----------------------------------
+- Analysize outputs at various layes
+- From each layer the feature maps are passed to Detector + Classifier and detecting some bounding boxes corresponding to that resolution.
+- Analyzing images at various resolution at the same time.
+- The diffent feature maps of various resolution in different layers are responsible for predicting the Bounding boxes as well as class labels.
+
+Default Bounding Boxes
+----------------------
+- Each cell in the feature map is associated with some default Bounding Boxes. For example 5 x 5 x 256 feature map has 4 differet BBoxes and they are prefixed for this feaure map.
+
+Handling Scale Variation
+------------------------
+The BBoxes in different Feature maps are accoding to scale. This is similar for different aspect ratios
+
+Detector + Classifier
+---------------------
+Lets consider on of the feaure map, the 19 x 19 x 1024 for example.
+The feature map si passed through serious of Conv layers which has filters.
+
+The filter of 1 x 1 x 1024 is applied on 19 x 19 x 150 feature map.
+B -> in the number of bounding boxs. 6 for this layer.
+C -> number of classes + Background. PascalVPC has 20 + 1 for background
+Each BBox has 4 coordinates. They are the deltas from x, y, w, h (default and the acutals)
+- What is in one row of the tensor (1 x 1 x 150)
+    - Defalut box 1 to 25
+        - 1 to 4 bins: dx, dy, dw, dh
+            The position of the defulat boxes are fixed. x, y, w, h of default box are fixed but the default boxes may not be right box. So we need to make a correction to the default box. 
+        - 5 - 25: confidence of each class c1.. c20, bkgnd
+    - There are 6 box which is 25 * 6 = 150
+
+Training
+--------
+- How to input data for training?
+    - It has image and Bboxes corresponding to these images
+    - This needs to be feed into the neural network.
+    - These Bboxes has to be mapped to a default BBox
+    - For a given feature map, the Bbox is mapped with there similarity. This idetermined by the overlap, Maximum IOU. 
+        - More the one BBox can be choosen for mapping same object and Non-maximum-suppression is used after detection to fix the problem.
+        - For all the class the information will be zero. for the sclected it would be 1.
+
+Loss Function
+-------------
+- Classification Loss
+    - Detected and actual class
+- Localization Loss
+    The ground truth box and what ever the network is predicting right now.
+    l -> prediction
+    g -> ground truth
+N -> Number of BBox in the traning set
+
+Class Imbalance problem
+-----------------------
+- High number of patches are background
+- To address this problem SSD uses Hard example mining procedre to select only hard examples of background pixels.
+- Use cross entropy loss on these subset of background pixels which are hard
+- Easy examples will be let which smooth surfaces where there is no texture or no object
+
+
+Pros
+----
+    - Accuracy comparable to Faster R-CNN
+    - Speed comparable to YOLO
+Cons
+----
+    - BBoxes predicted by earlier layers may not be very reliable as the initial layers may not have contect as deeper layers.
+    - Hard-example mining is a hard trick to use. For various tasks, we should take different hyper parameters of hard examle mining.

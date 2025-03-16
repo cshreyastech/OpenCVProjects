@@ -3,17 +3,63 @@ RETINANET
 Focus on things which you are not good at.
 Biggest challege in Single shot detectors was huge class imbalance with most of the pixels to be Background and small part to be object class.
 
-The huge class imbalance is addressed changing loss function.
+SSD uses hard example minning which require huge effort and expertise. RetinaNet addresses this challenge by changing the loss function.
+
+The huge class imbalance is addressed changing loss function. The new loss funtion is called focal loss.
+Cross enropy loss:
+CE(p, y) = 
+-log(p) if y = 1
+-log(1 - p) otherwise
+
+same as pt = 
+p if y = 1
+1 -p otherwise
+
+CE(pt) = -log(pt)
+
+CE(pt) = - alpha(t) * log(pt) where alpha e[0, 1]
+alpha may be set by inverse class frequency or treated as a hyper parameter to set by cross validation
+This can be set to inverse of background frequency. High background frequency will have low alpha and vice-versa
+
+This trys to make the loss function more balanced and address the class imbalance problem. However this was not effective. So Focal loss was introduced.
+
+---------------------------------
 Focal Loss:
 FL(pt) = -(1 - pt)^gamma * log(pt)
+gamma is a hyper parameter which is gained by multiple trails of training with gamma with various values.
+
 when pt ~ 1 that is model is able to predict correct easily, p^gamma is a very small number. So easy examples are weighted lot less than the hard examples.
 Focal loss focus on hard examples than easy examples.
 Feature pyramid network
+- Well classified examples does not contribute much for gamma more than 2 as seen in the graph.
 
+Architecture
+------------
+Authors used a different architecture compared to SSD.
+
+SSD Architecture
+------------------
+- Only one tensor from VGG-16 was taken as output (38x38x512)
+- There was no connection between the tensors which was was obtained from Conv layers and VGG-16 layer
+    - This creates a problem as the final layers has lot more semantic information than the earlier once.
+    - The information received in the later layers do not benifit the tensor from VGG-16 output as they are not connected
+
+Retinanet Architecture
+----------------------
+- It uses a standand backbone like resnet. So there are block of Convolution layers and size of the tensor changes. But within the block size of the feature map doesnt change.
+- We used the pyramid structure of the resnet conv layers and has feature maps at various resolutions already and they were used for an advantage.
+- The addtional CONV layers as in SSD was completely eleminated.
+- Feature Pyramid Network
+    - Information in the deepest layer is richest as it has the semantic information of the entire CNN layers but not enough resolution.
+    - However the first CONV1 layer has high resolution but low semantic information.
+    - So every layer will get semantic informatoin from its next layer as they have better semantic information so a connection was established at different depth and the output size was matched using conv1x1
+    - conv1 is used to change the depth of the feature map.
+    - All the feature map depth were upsampled by 2 and maintained the same for all layers (256 x 256)
+    - This increased the quality of information 
 Summary
 --------
 - Focal loss addressed the class imbalance problem.
-- Used hierarichical structure of convnets to create feature maps.
+- Used Feature Pyramid network hierarichical structure of convnets to create feature maps.
 - Improved feature map at every scale using information from deeper layers.
 - Improved accuracy.
 - Similar performance to SSD.
