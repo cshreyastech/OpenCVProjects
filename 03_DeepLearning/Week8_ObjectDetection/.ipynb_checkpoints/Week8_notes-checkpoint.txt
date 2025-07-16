@@ -1,4 +1,5 @@
 Object detetion
+- Traditional Computer vision based
 - One stage Object detection
     - YOLO, SSD, Retina-Net, Single shot multi-box
 - Two steps Object detection
@@ -41,6 +42,8 @@ Challenges
 
 7) Object Detection Evaluation Metrices
     - Intersection and Union
+        - It evalutes the overlap between two bounding boxes
+            - It has a Ground truth BBox and a Predicted BBox
         - IOU = area of overlap / area of union
         - To evaluate detection, we need to set threshold
             if IoU > Threshold = Prediction intersects well with the ground
@@ -54,16 +57,24 @@ Challenges
 8) How to evaluate detection?
     - It is considered True Positive (TP) only if
         - Confidence Score > Confidence Threshold
+            - This tells that we have found the object looking for
         - IoU > IoU threshold
+            - The predicted BBox has a high overlap with ground truth BBox
+        - Passing these threshold tells that not only the object is detected but also found at the right place.
     - False Positive
+        - If we detect the object with 
+            - high confidence but not actually present
+            - Not localized well
         - Confidence Score > Confidence Threshold
         - No ground truth bounding box(IoU = 0)
             - IoU < IoU threshold
     - False Negative
+        - There was an object precent but the classifier missed it completely
+        - Object is detected with low confidence
         - Confidence Score < Confidence Threshold
         - No bounding boxes detected near ground truth bounding box
             - IoU < IoU threshold
-    - Recall: It is the ability of a model to find all rlevant objects
+    - Recall: It is the ability of a model to find all relevant objects. That is all ground truth BBoxes
         Recall = TP / (TP + FN) = TP / (all ground truth)
     - Precision: It is the ability to identify only the relevant objects
         Precision = TP / (TP + FP) = TP / (all detections)
@@ -78,9 +89,30 @@ Pipeline for Object Detection
 ------------------------------
 1) Input Image: 
 2) Generate Proposals : Guesses for bounding boxes that may contain objects. Generate bounding boxes which may contain objects
-    - Background subraction
+    - Background subraction: Moving object detection
     - Sliding Window
-    - Image pyramid
+        - Image pyramid
     - Selective Search
 3) Classify Regions: Image Classification in the Bounding box
-4) Non-Maximum Suppression
+4) Non-Maximum Suppression(NMS)0
+
+Two Stage detector pipeline
+----------------------------
+1) Proposal generator
+    - Extracts Bounding Box from images which may contain target objects
+    - Not necessarily a Neural Network
+2) Refine stage
+    - Receives the BBox from Proposal generator, Classify them and defines the location of bounding box
+    - Tainable module that uses the visual feature to refine the module
+
+Two Stage Detetection Family
+----------------------------
+R-CNN
+    - Inout Image -> Select Search Region proposal generator -> Crop ROI for each proposal -> CNN feature(independent for each bbox -> BBox offset regressor, SVM object classifier -> Non maximum suppression
+    - proposed Region IoU > Threshold = Positive example
+    - Proposed Region IoU <= Threshold = Negative example
+    - R-CNN Bounding Box Regression: We have a bounding box. Change the coordinates of the Bbox to get a more accurate BBox.
+    - Problems with R-CNN
+        - Interference of each ROI is done independently
+        - RCNN trains each independent part (CNN Feature Extractor, SVM classifier, Bounding Box regressor) separately
+        - Limitation of Selective Search algorithm as proposal generator

@@ -24,6 +24,15 @@ This can be set to inverse of background frequency. High background frequency wi
 This trys to make the loss function more balanced and address the class imbalance problem. However this was not effective. So Focal loss was introduced.
 
 ---------------------------------
+Cross Entropy Loss:
+CE(p, y) = -log(p) if y = 1, - log(1 - p) otherwise
+rewriting:
+pt = p if y = 1, 1 - p otherwise
+
+CE(pt) = -log(pt)
+
+CE(pt) = - alpha * log(pt). alpha [0, 1] - inverse of class frequency
+
 Focal Loss:
 FL(pt) = -(1 - pt)^gamma * log(pt)
 gamma is a hyper parameter which is gained by multiple trails of training with gamma with various values.

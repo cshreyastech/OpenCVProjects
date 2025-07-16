@@ -1,11 +1,19 @@
 Single Shot Multibox Detector (SSD)
 -----------------------------------
+- Layers analyzed at different layers
+- The different feature maps are responsible for predicting the Bounding boxes and class labels.
+- Each cell is assigned with default bounding boxes.
+- There are 4 BBoxes, 2 squares(landscape and 2 portrait.
 - Default Bounding boxes: Check if default bounding box contains an object or not. It is not responsible for idenitying other objects
     - Handling Scale Variation
     - Handling Aspect Ratio
     - Detector + classifier
         - c+ 4 where 4 is this the coordinates of the BBox being trained
-        - 21 -> 20 classes + 1 class for background
+        - c (number of classes): 21 -> 20 classes + 1 class for background
+        - Filter size: 1x1x1024
+            - Number of filters
+            = B x (C + 4)
+            = 6 x (21 + 4) = 150
         - Understing one row of the tensor (1 x 1 x 150)
             - 1 to 25 bins correspondes to default box 
                 - 1 to 4 -> dx, dy, dw, dh -> Position of default box are fixed
@@ -23,6 +31,7 @@ To solve this SSD uses Hard mining procedure to select only hard example of back
 Pros
     - Accuracy comparable to Faster R-CNN
     - Speed comparable to YOLO
+    - Object can be seen and detected in different resolution unile YOLO 
 Disadvantage
     - Bounding boxes predicted by earlier layers may not be very reliable
     - Hard-example mining is a hard trick to use. For various tasks, we should take different hyper parameters of hard example mining.

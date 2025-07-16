@@ -1,8 +1,9 @@
+Single stage network
 Detrecron
 YOLO: You Only Look Once
     - It does not have Proposal Generator and Refine Stages
     - It directly predict Bounding box through Single Stage Network using features from the entire images
-    - It predicts Bounding Box of all classes simultaneously
+    - It predicts Bounding Box of all classes simultaneously. It means that YOLO reasons globally about the full image and all object simultaneously which makes it fast
     - Step 1: Resize the image
     - Step 2: Divide image into cells (S x S) (7 x 7)
         - Each cell has two responsibilities
@@ -18,6 +19,7 @@ YOLO: You Only Look Once
         - It could detect 98 objects
         - Each cell also produces class probability given there is an object
             P(Class | Object)
+            - Its conditional probability. What is the porbability of a particular class given an object is present in the bounding box.
     - Step 3: Non-Maxium suppression + Threshold to reduce the number of Bounding Boxes
     - Output Tensor: (7 x 7 cells) * 30 = 1470
         - 7 x 7 cells

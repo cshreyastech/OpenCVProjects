@@ -1,13 +1,14 @@
 Object detetion
-- One stage Object detection
-    - YOLO, SSD, Retina-Net, Single shot multi-box
+- Traditional Computer vision based
 - Two steps Object detection
     - RCNN, Fast RCNN, Faster RCNN, Pyramid Networks
+- Single stage Object detection
+    - YOLO, SSD, Retina-Net, Single shot multi-box
 Steps
 1) Bouding boxes around objects
-2) Classes or names of objects
+2) Classification of objects in Bounding Boxes: Classes or names of objects
 
-Challenges
+Challenges in object detection
 1) Intra Class variance: 
     Objects of the same class can look very different.
 2) Pose variation
@@ -23,6 +24,7 @@ Challenges
     - Aspect ratio
 5) Crowded Scene
     - Too many objects in the scene
+    - Croud density estimation
 
 6) Datasets
     1) PASCAL VOC
@@ -106,8 +108,8 @@ Two Stage detector pipeline
 
 Two Stage Detetection Family
 ----------------------------
-R-CNN
-    - Inout Image -> Select Search Region proposal generator -> Crop ROI for each proposal -> CNN feature(independent for each bbox -> BBox offset regressor, SVM object classifier -> Non maximum suppression
+R-CNN: Region based Convolution Neural Network
+    - Input Image -> Select Search Region proposal generator -> Crop ROI for each proposal -> CNN feature(independent for each bbox -> BBox offset regressor, SVM object classifier -> Non maximum suppression
     - proposed Region IoU > Threshold = Positive example
     - Proposed Region IoU <= Threshold = Negative example
     - R-CNN Bounding Box Regression: We have a bounding box. Change the coordinates of the Bbox to get a more accurate BBox.
@@ -115,3 +117,20 @@ R-CNN
         - Interference of each ROI is done independently
         - RCNN trains each independent part (CNN Feature Extractor, SVM classifier, Bounding Box regressor) separately
         - Limitation of Selective Search algorithm as proposal generator
+Fast R-CNN:
+    - Region proposal generator
+    - Extract CNN features for the whole image
+    - ROI pooling for each proposal
+        - Single end to end training
+    - BBox offset regressor and Softmax classifier
+    - This gives better conputational utilization and 10 to 25x speed up over RCNN
+    - What improved
+        - Pipeline becomes more efficient computationally
+        - Network can be trained in a single step in an end-to-end manner
+    - Limitation:
+        - Non trainable Selective Search as proposal generator
+Faster R-CNN:
+    - Region proposal network as a proposal generator.
+    - Shared computation of CNN features
+        - Features used for image classification at the end is also used to for proposal generator(Proposed BBoxes). Due to this computational load is decreased drastically. The convolution featues are calculated only once.
+    - Joint training of BBox offset and Classifier with CNN fine-tuning.
