@@ -4,7 +4,7 @@ CNN
     - ROC curve
 - How accuracy is measured for multi-class classification?
 - Convolution filters
-- Layer
+- Types of Layers
   - Fully conected layers, activation layer, Convolution and Maxpooling layer
   - Batch normalization layers
 
@@ -79,7 +79,7 @@ Convolution Layer
     - Simple and intuitive
     - Not a good metric for imbalanced datasets
   - Precision - Positive predictive value
-    - Precistion is the fration of relevent instances among the instanes classified as relevent.
+    - Precistion is the fration of relevent instances among the instanes classified as relevent. 
     - Helps focus on decreasing the False Positive rate.
     - Precision = TP / (TP + FP )
   - Recall or Sensitivity:

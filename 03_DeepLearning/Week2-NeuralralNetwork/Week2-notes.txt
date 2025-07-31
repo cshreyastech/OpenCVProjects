@@ -16,7 +16,7 @@ Mean Absolute Error L = 1/ n E, i=1,n|yi - y_hati|
 L2Norm (MSE) = ||y - yhat||^2
 ||x||2 = sqrt(x1^2 + x1^2 + ..... + xn^2)
 L1Norm (MAE) = ||y - yhat||
-- MSE loss is mostly commonly used
+- MSE loss is mostly commonly used if data is well behaved
 - MAE loss is used when the data has outliers
 
 Classification Loss function
@@ -28,6 +28,8 @@ Cross Entropy:
 - Not symmetric: H(p,q) Not = to H(q, p)
 - When the two distributions are the same, cross entropy equals entropy
 - Otherwise cross entropy > entropy H(p, q) >= H(p)
+- Cross Entropy Loss
+ L = - 1/n sigma i=1..n sigma j=1..n yij log yhatij
 Also called as logarithmic loss, log loss, logistic loss, categorical cross entropy loss, cross entropy
 Other losses:
  - Unbalanced dataset: Cross entropy with weights
@@ -64,3 +66,35 @@ Types of Activation Function
   - No vanishing gradients
   - Conputationally inexpensive
   - Solves the dying ReLU problem
+
+Introduction to Pytorch NN module
+---------------------------------
+Step 1:
+Module
+torch.nn.Module: Base class for all Neural Network
+
+Sequential
+torch.nn.Sequential: A sequential container for easily creating Neural Network layer
+
+Layers
+nn.Linear
+nn.Conv2D
+nn.MaxPool2D
+
+Activation Functions
+Module: nn.ReLU, nn.Sigmoid
+Functions: nn.functional.relu, nn.sigmoid
+
+Step 2:
+Loss Functions: nn.L1Loss, nn.MSELoss, nn.CrossEntropyLoss
+
+Step 3:
+Choose an optimizer: torch.optim: optim.SGD, optim.Adam, optim.RMSProp
+
+Step 4: Forward pass on training data with current parameters
+
+Step 5: Calculate Loss
+
+Step 6: Backward Pass
+
+Step 7: Use optimizer to update model parameters (weights)

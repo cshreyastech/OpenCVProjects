@@ -21,7 +21,7 @@ Histogram-based methods
 Datasets
 ---------
 Pascal VOC 2012
-    - 20 classes + 1  ackground class
+    - 20 classes + 1  background class
     - Four categories: Vehicle, Household, animals and others
     - 1449 training images
     - 1469 validation images
@@ -74,13 +74,14 @@ To solve this below approaches can be followed
 Naive approach
 1) Image Pyramids
 2) Encoder-Decoder: Downsample and Upsample
-3) Dilated Convolution : Change convolution kernel
+3) Dilated Convolution : Change convolution kernel. Increases context without changing the weights.
 4) Spatial Pyramid Pooling
 
 2) Dilated Convolution
 -------------------
 - Dilation Convolution is used when we want to increase the receptive field of Kernel without increasing its size.
 - Useful to analyze an image at different scale
+- Increase the context without changing weights
 
 3) Transposed Convolution (Deconvolution)
 -------------------------
@@ -89,6 +90,7 @@ Naive approach
 4) Fully Convolution Net (FCN)
 ------------------------
 - One of the first Deepleaning based segmentation architecture
+- Used for chaning the FCN to CN just by changing the number of filters. CNN 7x7x512 > FCN (filter size 7 x 7, number of filters 4096) -> O/P FCN 1 x 1 x 4096
 - Modify image classification networks as the backbone
 - Replace the fully connected layer by convolution layers
 - Use skip connections and deconvolution blocks to combine information at different resolution
@@ -110,11 +112,13 @@ Naive approach
 - Different upsampling strategy
     - Requires less memory
 - Pooling Indices
+    -> Pass just oputput of max pooling indices. so less values and just pass indices
+    -> Pass indices(int) instead of values which is in float
 
 7) DeepLab Segmentation architecture
 ------------------------------------
 - Use VGG-16 backbone
 - Replace some convolution filters by dilated convolution filters
-- Use Conditional Random Fields(CRF) to ensorce spatial consistency
+- Use Conditional Random Fields(CRF) to ensorce spatial consistency (removed from v3)
 - Dilated Convolution: Its adding holes in the filter to increase the receptive field of the convolution kernel.
 - Y gradient filter: forms a heat map

@@ -2,6 +2,7 @@ Optimizer
   - Gradient decent
   - SGD
   - Gradient decent with momentum
+    - Moving average of the gradient
     - Gradient decent update: Wt = Wt-1 - alpha gt-1
     - Replace the gradient with the moving average of gradient over time
     - Use moving average: Wt = Wt-1 - alpha vt

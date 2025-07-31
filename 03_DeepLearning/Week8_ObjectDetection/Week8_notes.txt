@@ -108,6 +108,10 @@ Two Stage detector pipeline
 
 Two Stage Detetection Family
 ----------------------------
+Pipeline
+--------
+Input Image -> Feature Extractor -> Proposal Generator -> Refine stage(Classification, BBox regression)
+
 R-CNN: Region based Convolution Neural Network
     - Input Image -> Select Search Region proposal generator -> Crop ROI for each proposal -> CNN feature(independent for each bbox -> BBox offset regressor, SVM object classifier -> Non maximum suppression
     - proposed Region IoU > Threshold = Positive example

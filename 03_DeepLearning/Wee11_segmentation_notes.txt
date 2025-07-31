@@ -90,7 +90,6 @@ Naive approach
 4) Fully Convolution Net (FCN)
 ------------------------
 - One of the first Deepleaning based segmentation architecture
-- Used for chaning the dimention just by changing the number of filters. CNN 7x7x512 > FCN (filter size 7 x 7, number of filters 4096) -> O/P FCN 1 x 1 x 4096
 - Modify image classification networks as the backbone
 - Replace the fully connected layer by convolution layers
 - Use skip connections and deconvolution blocks to combine information at different resolution
