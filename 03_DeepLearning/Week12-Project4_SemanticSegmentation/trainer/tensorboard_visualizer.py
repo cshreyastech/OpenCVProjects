@@ -1,12 +1,11 @@
 from torch.utils.tensorboard import SummaryWriter
 
 from .visualizer import Visualizer
-from trainer.configuration import TensorBoardConfig
+
 
 class TensorBoardVisualizer(Visualizer):
     def __init__(self):
-        tb_config: TensorBoardConfig = TensorBoardConfig()
-        self._writer = SummaryWriter(log_dir=tb_config.tensorboard_dir)
+        self._writer = SummaryWriter()
 
     def update_charts(self, train_metric, train_loss, test_metric, test_loss, learning_rate, epoch):
         if train_metric is not None:

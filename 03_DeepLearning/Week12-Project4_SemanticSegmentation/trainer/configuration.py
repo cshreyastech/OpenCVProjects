@@ -2,8 +2,7 @@ from typing import Callable, Iterable
 from dataclasses import dataclass
 
 from torchvision.transforms import ToTensor
-import os
-base_dir = "../../../../../data/03_DeepLearning/Week11_segmentation/"
+
 
 @dataclass
 class SystemConfig:
@@ -14,9 +13,7 @@ class SystemConfig:
 
 @dataclass
 class DatasetConfig:
-    data_path = os.path.join(base_dir, "data")
-    # root_dir: str = "data"  # dataset directory root
-    root_dir: str = data_path  # dataset directory root
+    root_dir: str = "data"  # dataset directory root
     train_transforms: Iterable[Callable] = (
         ToTensor(),
     )  # data transformation to use during training data preparation
@@ -27,8 +24,8 @@ class DatasetConfig:
 
 @dataclass
 class DataloaderConfig:
-    batch_size: int = 4 #250  # amount of data to pass through the network at each forward-backward iteration
-    num_workers: int = 2 #5  # number of concurrent processes using to prepare data
+    batch_size: int = 250  # amount of data to pass through the network at each forward-backward iteration
+    num_workers: int = 5  # number of concurrent processes using to prepare data
 
 
 @dataclass
@@ -44,13 +41,9 @@ class OptimizerConfig:
 
 @dataclass
 class TrainerConfig:
-    model_dir: str = os.path.join(base_dir, "checkpoints")  # directory to save model states
+    model_dir: str = "checkpoints"  # directory to save model states
     model_save_best: bool = True  # save model with best accuracy
     model_saving_frequency: int = 1  # frequency of model state savings per epochs
     device: str = "cpu"  # device to use for training.
-    epoch_num: int = 2 #50  # number of times the whole dataset will be passed through the network
+    epoch_num: int = 50  # number of times the whole dataset will be passed through the network
     progress_bar: bool = False  # enable progress bar visualization during train process
-
-@dataclass
-class TensorBoardConfig:
-    tensorboard_dir: str = os.path.join(base_dir, "runs")  # directory to save tensorboard files
