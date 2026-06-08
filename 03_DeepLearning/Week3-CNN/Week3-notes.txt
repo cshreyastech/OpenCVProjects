@@ -81,7 +81,7 @@ Convolution Layer
   - Precision - Positive predictive value
     - Precistion is the fration of relevent instances among the instanes classified as relevent. 
     - Helps focus on decreasing the False Positive rate.
-    - Precision = TP / (TP + FP )
+    - Precision = TP / (TP + FP)
   - Recall or Sensitivity:
     - Recall is the fraction of the total amount of true positives that were actually retrieved.
     - It is also called True Positive Rate.
